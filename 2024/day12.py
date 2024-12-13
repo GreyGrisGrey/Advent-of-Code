@@ -19,7 +19,7 @@ def part1():
             if grid[i][j] != "." and grid[i][j] != "#":
                 perimDict[count] = 0
                 letter = grid[i][j]
-                areaDict[count] = BFS(grid, letter, [i, j], areaGrid, count, perimDict)
+                areaDict[count] = DFS(grid, letter, [i, j], areaGrid, count, perimDict)
                 count += 1
                 hashWipe(grid, [i, j])
     total = 0
@@ -48,7 +48,7 @@ def part2():
             if grid[i][j] != "." and grid[i][j] != "#":
                 letter = grid[i][j]
                 perimDict = {}
-                areaDict[count] = part2BFS(grid, letter, [i, j], areaGrid, count, perimDict, None)
+                areaDict[count] = part2DFS(grid, letter, [i, j], areaGrid, count, perimDict, None)
                 perimeter = 0
                 for k in perimDict:
                     if perimDict[k]:
@@ -60,8 +60,7 @@ def part2():
                 hashWipe(grid, [i, j])
     return total
 
-# its not even BFS, its DFS
-def BFS(grid, letter, curr, zoning, count, perimeter):
+def DFS(grid, letter, curr, zoning, count, perimeter):
     if curr[0] < 0 or curr[1] < 0 or curr[0] >= len(grid) or curr[1] >= len(grid):
         perimeter[count] += 1
         return 0
@@ -69,10 +68,10 @@ def BFS(grid, letter, curr, zoning, count, perimeter):
         grid[curr[0]][curr[1]] = "."
         zoning[curr[0]][curr[1]] = count
         total = 1
-        total += BFS(grid, letter, [curr[0]+1, curr[1]], zoning, count, perimeter)
-        total += BFS(grid, letter, [curr[0]-1, curr[1]], zoning, count, perimeter)
-        total += BFS(grid, letter, [curr[0], curr[1]+1], zoning, count, perimeter)
-        total += BFS(grid, letter, [curr[0], curr[1]-1], zoning, count, perimeter)
+        total += DFS(grid, letter, [curr[0]+1, curr[1]], zoning, count, perimeter)
+        total += DFS(grid, letter, [curr[0]-1, curr[1]], zoning, count, perimeter)
+        total += DFS(grid, letter, [curr[0], curr[1]+1], zoning, count, perimeter)
+        total += DFS(grid, letter, [curr[0], curr[1]-1], zoning, count, perimeter)
         return total
     elif grid[curr[0]][curr[1]] == ".":
         return 0
@@ -80,7 +79,7 @@ def BFS(grid, letter, curr, zoning, count, perimeter):
         perimeter[count] += 1
         return 0
 
-def part2BFS(grid, letter, curr, zoning, count, perimeter, prev):
+def part2DFS(grid, letter, curr, zoning, count, perimeter, prev):
     if curr[0] < 0 or curr[1] < 0 or curr[0] >= len(grid) or curr[1] >= len(grid):
         actual = [curr[0]-prev[0], curr[1]-prev[1]]
         if actual[1] == 1:
@@ -96,10 +95,10 @@ def part2BFS(grid, letter, curr, zoning, count, perimeter, prev):
         grid[curr[0]][curr[1]] = "."
         zoning[curr[0]][curr[1]] = count
         total = 1
-        total += part2BFS(grid, letter, [curr[0]+1, curr[1]], zoning, count, perimeter, [curr[0], curr[1]])
-        total += part2BFS(grid, letter, [curr[0]-1, curr[1]], zoning, count, perimeter, [curr[0], curr[1]])
-        total += part2BFS(grid, letter, [curr[0], curr[1]+1], zoning, count, perimeter, [curr[0], curr[1]])
-        total += part2BFS(grid, letter, [curr[0], curr[1]-1], zoning, count, perimeter, [curr[0], curr[1]])
+        total += part2DFS(grid, letter, [curr[0]+1, curr[1]], zoning, count, perimeter, [curr[0], curr[1]])
+        total += part2DFS(grid, letter, [curr[0]-1, curr[1]], zoning, count, perimeter, [curr[0], curr[1]])
+        total += part2DFS(grid, letter, [curr[0], curr[1]+1], zoning, count, perimeter, [curr[0], curr[1]])
+        total += part2DFS(grid, letter, [curr[0], curr[1]-1], zoning, count, perimeter, [curr[0], curr[1]])
         return total
     elif grid[curr[0]][curr[1]] == ".":
         return 0
