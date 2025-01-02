@@ -99,8 +99,5 @@ def adjacentSeats(part1, grid, space):
                 adjList.append(str(newCoords[0]) + ":" + str(newCoords[1]))
     return ";".join(adjList)
 
-        
-
-
 print("Part 1 :", part1("input.txt"))
 print("Part 2 :", part2("input.txt"))
