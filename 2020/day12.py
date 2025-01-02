@@ -33,13 +33,12 @@ def part1(file):
                     elif move == 270 and direction[0] == 1:
                         direction[1] *= -1
                     direction[0] = (direction[0] + 1)%2
-    print(abs(coords[0]) + abs(coords[1]))
+    return (abs(coords[0]) + abs(coords[1]))
 
 
 def part2(file):
     shipCoords = [0, 0]
     wayCoords = [10, 1]
-    direction = [0, 1]
     for i in open(file):
         command = i[0]
         move = int(i[1::])
@@ -79,8 +78,7 @@ def part2(file):
                     temp = wayCoords[0]
                     wayCoords[0] = -1 * wayCoords[1]
                     wayCoords[1] = temp
-        print(shipCoords, wayCoords)
-    print(abs(shipCoords[0]) + abs(shipCoords[1]))
+    return (abs(shipCoords[0]) + abs(shipCoords[1]))
 
-part1("input.txt")
-part2("input.txt")
+print("Part 1 :", part1("input.txt"))
+print("Part 2 :", part2("input.txt"))
