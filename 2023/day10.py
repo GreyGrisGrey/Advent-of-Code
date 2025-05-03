@@ -32,7 +32,7 @@ class Node:
         self.Symbol = "O"
     
     def getLoop(self):
-        return inLoop
+        return self.inLoop
 
 
 def isntOOB(x, y, pipeMap):
