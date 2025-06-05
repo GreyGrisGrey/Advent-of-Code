@@ -44,4 +44,19 @@ def part1():
             Y[1] = curr[1]
     return BFS(perimeterDict, [[1, 1]])
 
+def part2():
+    vertexDict = {}
+    dirDict = {"R":(1, 0), "L":(-1, 0), "U":(0, -1), "D":(0, 1)}
+    curr = [0, 0]
+    mins = [0, 0]
+    for i in open("in.txt"):
+        res = i.strip().split(" ")
+        res[1] = int(res[1])
+        if ":".join(curr) in vertexDict:
+            vertexDict[":".join(curr)] += res[0]
+        else:
+            vertexDict[":".join(curr)] = res[0]
+        curr[0] += dirDict[res[0]][0]
+        curr[1] += dirDict[res[0]][1]
+
 print(part1())
