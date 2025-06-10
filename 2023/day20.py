@@ -1,3 +1,5 @@
+from math import gcd
+
 class Node:
     def __init__(self, name, type = "flip"):
         self.ins = []
@@ -6,6 +8,7 @@ class Node:
         self.outs = []
         self.type = type
         self.on = False
+        self.lowSig = False
     
     def addInput(self, input):
         self.ins.append(input)
@@ -30,6 +33,7 @@ class Node:
                     checker = False
                     break
             if checker:
+                self.lowSig = True
                 return self.send(False)
             else:
                 return self.send(True)
@@ -45,19 +49,13 @@ class Node:
     def getName(self):
         return self.name
     
-    def printSelf(self):
-        print(self.name)
-        ins = []
-        outs = []
-        for i in self.ins:
-            ins.append(i.getName())
-        for i in self.outs:
-            outs.append(i.getName())
-        print(ins)
-        print(outs)
+    def getLarge(self):
+        if self.type == "conj" and len(self.ins) + len(self.outs) > 6:
+            return True
+        return False
 
 
-def part1():
+def partBoth():
     nodeDict = {}
     lineList = []
     typeMap = {"%":"flip", "&":"conj", "b":"broadcast"}
@@ -73,7 +71,14 @@ def part1():
             base.addOutput(nodeDict[j])
             nodeDict[j].addInput(base)
     total = [0, 0]
-    for i in range(1000):
+    conj, nums = [], []
+    for i in nodeDict:
+        if nodeDict[i].getLarge():
+            conj.append(nodeDict[i].getName()[1::])
+            nums.append(-1)
+    for i in range(30000):
+        if i == 1000:
+            res1 = total[0] * total[1]
         liveSignals = [[nodeDict["roadcaster"], False, None]]
         while len(liveSignals) > 0:
             if liveSignals[0][1] == False:
@@ -85,6 +90,17 @@ def part1():
                 for j in res:
                     liveSignals.append(j)
             del liveSignals[0]
-    return total[0] * total[1]
+        checked = True
+        for j in range(len(nums)):
+            if nums[j] == -1 and nodeDict[conj[j]].lowSig:
+                nums[j] = i + 1
+            elif not nodeDict[conj[j]].lowSig:
+                checked = False
+        if checked and i >= 1000:
+            break
+    leastCommonMult = nums[0]
+    for i in range(len(nums)-1):
+        leastCommonMult *= int(nums[i+1]/gcd(leastCommonMult, nums[i+1]))
+    return res1, leastCommonMult
 
-print(part1())
+print(partBoth())
