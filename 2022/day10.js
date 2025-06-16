@@ -7,7 +7,6 @@ function part1() {
     for (var i = 0; i < a.length; i++) {
         if (cycle >= 18) {
             count += 20 * X * cycleCount;
-            console.log(count, cycle, cycleCount, X, 20 * X * cycleCount);
             cycle -= 40;
             cycleCount += 2;
         }
@@ -18,7 +17,6 @@ function part1() {
         else {
             cycle += 1;
         }
-        console.log(cycle, X);
     }
     return count;
 }

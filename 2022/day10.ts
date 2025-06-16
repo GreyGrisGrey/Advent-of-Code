@@ -1,13 +1,10 @@
 import * as fs from "fs";
-
-
 function part1(): number {
     let count = 0, a = fs.readFileSync("in.txt", "utf8").split("\r\n"), X = 1
     let cycle = 0, cycleCount = 1
     for (let i = 0; i < a.length; i++) {
         if (cycle >= 18) {
             count += 20 * X * cycleCount
-            console.log(count, cycle, cycleCount, X, 20 * X * cycleCount)
             cycle -= 40
             cycleCount += 2
         }
@@ -17,7 +14,6 @@ function part1(): number {
         } else {
             cycle += 1
         }
-        console.log(cycle, X)
     }
     return count
 }
