@@ -43,6 +43,3 @@ function partBoth() {
     return [count, minimum];
 }
 console.log(partBoth());
-// 933843 low?
-// 1218315 high.
-// multiple of same dir name. fucks sake
