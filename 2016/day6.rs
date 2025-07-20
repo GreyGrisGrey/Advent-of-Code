@@ -41,5 +41,3 @@ fn main() {
     println!("{}", output2);
     return
 }
-
-//ikerpcty
