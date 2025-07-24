@@ -1,10 +1,9 @@
 use std::fs;
 mod md5;
-use std::collections::HashMap;
 
 fn main() {
-    println!("{}", part_both(false));
-    println!("{}", part_both(true));
+    println!("Part 1: {}", part_both(false));
+    println!("Part 2: {}", part_both(true));
 }
 
 fn get_triple(line: &str) -> u8 {
@@ -46,18 +45,17 @@ fn get_quint(line: &str, character: char) -> bool {
     return false;
 }
 
-fn part_both(second: bool) -> u32 {
+fn part_both(second: bool) -> i32 {
     let data = fs::read_to_string("in.txt").unwrap();
     let mut count = 0;
     let mut hash_vec: Vec<Vec<u32>> = Vec::new();
-    let mut check_vec: Vec<String> = Vec::new();
+    let mut good_index: Vec<i32> = Vec::new();
     let mut total_hash = 0;
-    let mut hasher: HashMap<String, bool> = HashMap::new();
     loop {
         let mut temp = data.to_owned();
         temp.push_str(&count.to_string());
         if second {
-            for i in 0..2016 {
+            for _i in 0..2016 {
                 temp = format!("{:x}", md5::compute(temp));
             }
         }
@@ -69,12 +67,10 @@ fn part_both(second: bool) -> u32 {
             if get_quint(new_hash, hash_vec[i][0] as u8 as char) {
                 remove_index.push(i as u8);
                 total_hash += 1;
-                if total_hash >= 64 && !second {
-                    return hash_vec[i][2];
-                } else if total_hash >= 65 {
-                    // This shouldn't be here, for some reason it counts a 65th accepted key on my input.
-                    // I looked through each accepted key and couldn't see any issue, I quit, this is good enough for me.
-                    return hash_vec[i][2];
+                good_index.push(hash_vec[i][2] as i32);
+                if total_hash >= 90 {
+                    good_index.sort();
+                    return good_index[63];
                 }
             } else if hash_vec[i][1] <= 0 {
                 remove_index.push(i as u8);
@@ -82,11 +78,9 @@ fn part_both(second: bool) -> u32 {
         }
         for i in 0..remove_index.len() {
             hash_vec.remove(remove_index[remove_index.len() - (i + 1)] as usize);
-            check_vec.remove(remove_index[remove_index.len() - (i + 1)] as usize);
         }
         if res != 0 {
             hash_vec.push(Vec::from([res as u32, 1000 as u32, count as u32]));
-            check_vec.push(new_hash.clone());
         }
         count += 1;
     }
