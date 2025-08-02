@@ -3,7 +3,7 @@ use std::fs;
 
 fn main() {
     let res = part_both();
-    println!("{} {}", res[0], res[1]);
+    println!("Part 1: {}\nPart 2: {}", res[0], res[1]);
 }
 
 fn bfssearch(

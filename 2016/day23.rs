@@ -2,8 +2,8 @@ use std::collections::HashMap;
 use std::fs;
 
 fn main() {
-    println!("{}", part_both(7));
-    println!("{}", part_both(12));
+    println!("Part 1: {}", part_both(7));
+    println!("Part 2: {}", part_both(12));
 }
 
 fn part_both(starter: i32) -> i32 {
