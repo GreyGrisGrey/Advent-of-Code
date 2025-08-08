@@ -11,6 +11,17 @@ class intMachine:
         self.delFlag = True
         self.rel = 0
     
+    def clone(self):
+        newMachine = intMachine(self.day)
+        for i in self.spaces:
+            newMachine.setIndex(i, self.spaces[i])
+        newMachine.addInputs(self.inputs)
+        newMachine.index = self.index
+        newMachine.state = self.state
+        newMachine.delFlag = self.delFlag
+        newMachine.rel = self.rel
+        return newMachine
+    
     def deleteInputs(self, newDel):
         self.delFlag = newDel
     
