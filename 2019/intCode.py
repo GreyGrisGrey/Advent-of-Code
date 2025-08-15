@@ -37,6 +37,17 @@ class intMachine:
     def setIndex(self, index, newVal):
         self.spaces[index] = newVal
     
+    def getState(self):
+        return self.state
+    
+    def retrieveOut(self):
+        if self.out[0]:
+            return [True, self.out[1]]
+        return [False, 0]
+    
+    def retrieveInLen(self):
+        return len(self.inputs)
+    
     def run(self, printOuts = False, getOuts = False):
         while self.state == 0:
             self.step()
@@ -46,13 +57,13 @@ class intMachine:
                 return [self.state, self.out[1]]
         return [self.state, None]
     
-    def step(self):
+    def step(self, getOuts = True):
         if self.state == 0:
             if self.out[0]:
                 self.out = [False, 0]
             self.runOp()
-            if self.out[0]:
-                return [0, self.out[1]]
+            if self.out[0] and getOuts:
+                return [self.state, self.out[1]]
         return [self.state, None]
     
     # Runs singular code step
@@ -73,6 +84,8 @@ class intMachine:
             # Write input to target location
             # Known issue: Currently inserts "None" into self.spaces if called without input
             case 3:
+                if len(self.inputs) == 0 and self.day == 23:
+                    self.addInput(-1)
                 if len(self.inputs) == 0:
                     print("Error: Requested input without providing input")
                     print("Location:", self.index)
