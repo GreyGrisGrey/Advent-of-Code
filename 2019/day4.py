@@ -22,7 +22,7 @@ def check2(num):
                 return True
     return False
 
-def partBoth():
+def partBoth(fileName = "in.txt"):
     res = [0, 0]
     start, end = open("in.txt").read().split("-")
     for i in range(int(end) + 1):
@@ -32,4 +32,5 @@ def partBoth():
             res[0] += 1
     print("Part 1:", res[0], "\nPart 2:", res[1])
 
-partBoth()
+if __name__ == "__main__":
+    partBoth("in4.txt")

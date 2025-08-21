@@ -68,8 +68,8 @@ def checkNext(first, second, keyMapping, checked):
             return False
     return True
 
-def part1():
-    data = open("in.txt").read().split("\n")
+def part1(fileName = "in.txt"):
+    data = open(fileName).read().split("\n")
     spaces = {}
     start = None
     doors = []
@@ -155,8 +155,8 @@ def BFS2(mapping, start, keys):
     return keyPaths
 
 
-def part2():
-    data = open("in.txt").read().split("\n")
+def part2(fileName = "in.txt"):
+    data = open(fileName).read().split("\n")
     spaces = {}
     start = None
     doors = []

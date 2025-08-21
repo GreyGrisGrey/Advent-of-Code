@@ -1,6 +1,6 @@
 from intCode import intMachine
 
-def part1():
+def part1(fileName = "in.txt"):
     tiles = {}
     machine = intMachine(13)
     nums = [0, 0, 0]
@@ -32,7 +32,7 @@ def printScreen(tiles):
                 print(" ", end="")
     print("")
 
-def part2():
+def part2(fileName = "in.txt"):
     tiles = {}
     machine = intMachine(13)
     machine.setIndex(0, 2)
@@ -80,5 +80,5 @@ def part2():
     print("Part 2:", score)
 
 if __name__ == "__main__":
-    part1()
-    part2()
+    part1("in13.txt")
+    part2("in13.txt")

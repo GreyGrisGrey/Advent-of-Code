@@ -1,7 +1,7 @@
 from intCode import intMachine
 from itertools import permutations
 
-def part1():
+def part1(fileName = "in.txt"):
     options = permutations([0, 1, 2, 3, 4])
     maximum = 0
     for i in options:
@@ -17,7 +17,7 @@ def part1():
             maximum = prev
     return maximum
 
-def part2():
+def part2(fileName = "in.txt"):
     options = permutations([5, 6, 7, 8, 9])
     maximum = 0
     for i in options:
@@ -40,5 +40,5 @@ def part2():
     return maximum
 
 if __name__ == "__main__":
-    print("Part 1:", part1())
-    print("Part 2:", part2())
+    print("Part 1:", part1("in7.txt"))
+    print("Part 2:", part2("in7.txt"))

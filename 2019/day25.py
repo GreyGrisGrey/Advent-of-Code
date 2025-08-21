@@ -1,6 +1,6 @@
 from intCode import intMachine
 
-def part1():
+def part1(fileName = "in.txt"):
     machine = intMachine()
     val = ""
     comDict = {"w":"west", "e":"east", "n":"north", "s":"south", "i":"inv"}
@@ -34,4 +34,4 @@ def part1():
         val = input()
 
 if __name__ == "__main__":
-    part1()
+    part1("in25.txt")

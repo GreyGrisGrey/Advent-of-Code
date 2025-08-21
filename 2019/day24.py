@@ -3,10 +3,10 @@ def checkGood(x, y):
         return False
     return True
 
-def part1():
+def part1(fileName = "in.txt"):
     cache = {}
     tiles = []
-    data = open("in.txt").read().split("\n")
+    data = open(fileName).read().split("\n")
     for i in data:
         newLine = []
         for j in i:
@@ -80,8 +80,8 @@ def checkLine(x, y, z, spaces):
                 nums += 1
     return nums
 
-def part2():
-    data = open("in.txt").read().split("\n")
+def part2(fileName = "in.txt"):
+    data = open(fileName).read().split("\n")
     x = y = -2
     spaces = {}
     for i in data:
@@ -122,10 +122,5 @@ def part2():
     return len(spaces)
 
 if __name__ == "__main__":
-    print("Part 1:", part1())
-    print("Part 2:", part2())
-    
-# 2 steps required to subsume what, 24 cells?
-# then 200 should subsume 2400 outwards and 2400 inwards
-# caching not required.
-# 
+    print("Part 1:", part1("in24.txt"))
+    print("Part 2:", part2("in24.txt"))

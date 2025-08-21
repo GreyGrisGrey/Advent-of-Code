@@ -26,7 +26,7 @@ def printCode(mapping):
         print(newLine)
     
 
-def partBoth(two = False):
+def partBoth(two = False, fileName = "in.txt"):
     machine = intMachine(11)
     currSpace = [0, 0]
     direction = [0, -1]
@@ -60,5 +60,5 @@ def partBoth(two = False):
             mapping[currSpace[0] * 100 + currSpace[1]] = 0
 
 if __name__ == "__main__":
-    partBoth(False)
-    partBoth(True)
+    partBoth("in11.txt")
+    partBoth(True, "in11.txt")

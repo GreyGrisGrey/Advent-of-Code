@@ -7,8 +7,8 @@ def moonString(moons, vels, index):
         newString += str(vels[i][index]) + ":"
     return newString
 
-def partBoth():
-    data = open("in.txt").read().split("\n")
+def partBoth(fileName = "in.txt"):
+    data = open(fileName).read().split("\n")
     moons = []
     vels = []
     caches = [{}, {}, {}]
@@ -59,4 +59,5 @@ def partBoth():
     curr = curr * nums[2] / gcd(nums[2], curr)
     print("Part 2:", int(curr))
 
-partBoth()
+if __name__ == "__main__":
+    partBoth("in12.txt")

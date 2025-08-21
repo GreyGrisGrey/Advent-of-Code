@@ -1,7 +1,7 @@
 from math import floor
 
-def partBoth():
-    data = open("in.txt").read()
+def partBoth(fileName = "in.txt"):
+    data = open(fileName).read()
     best = [999, 0]
     mapping = {}
     for i in range(floor(len(data)/150)):
@@ -22,4 +22,5 @@ def partBoth():
                 print(" ", end = "")
         print("")
 
-partBoth()
+if __name__ == "__main__":
+    partBoth("in8.txt")

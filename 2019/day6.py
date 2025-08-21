@@ -7,7 +7,7 @@ def countOrbit(curr, orbits, mapping):
     return count
     
 
-def part1():
+def part1(fileName = "in.txt"):
     mapping = {}
     orbits = []
     curr = 0
@@ -23,7 +23,7 @@ def part1():
         total += countOrbit(i, orbits, mapping) - 1
     print("Part 1:", total)
     
-def part2():
+def part2(fileName = "in.txt"):
     mapping = {}
     reversing = {}
     orbits = []
@@ -61,5 +61,5 @@ def part2():
         del opens[0]
 
 if __name__ == "__main__":
-    part1()
-    part2()
+    part1("in6.txt")
+    part2("in6.txt")

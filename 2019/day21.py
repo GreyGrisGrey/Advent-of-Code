@@ -1,6 +1,6 @@
 from intCode import intMachine
 
-def part1():
+def part1(fileName = "in.txt"):
     instructs = ["NOT C T\n", "NOT A J\n", "OR T J\n", "AND D J\n", "WALK\n"]
     machine = intMachine(21)
     for i in instructs:
@@ -14,7 +14,7 @@ def part1():
                 return res[1]
     return
 
-def part2():
+def part2(fileName = "in.txt"):
     instructs = ["NOT C T\n", "NOT F J\n", "AND T J\n", "NOT C T\n", "AND F T\n", "AND H T\n", "OR T J\n", "NOT A T\n", "OR T J\n", "NOT B T\n", "OR T J\n", "NOT C T\n", "AND E T\n", "OR T J\n", "AND D J\n", "RUN\n"]
     machine = intMachine(21)
     for i in instructs:
@@ -31,5 +31,5 @@ def part2():
     return
 
 if __name__ == "__main__":
-    print("Part 1:", part1())
-    print("Part 2:", part2())
+    print("Part 1:", part1("in21.txt"))
+    print("Part 2:", part2("in21.txt"))

@@ -1,6 +1,6 @@
 from math import ceil
 
-def part1():
+def part1(fileName = "in.txt"):
     data = open("in.txt").read().split("\n")
     mapping = {}
     end = None
@@ -43,7 +43,7 @@ def part1():
         del opens[0]
     print("Part 1:", required)
 
-def part2():
+def part2(fileName = "in.txt"):
     data = open("in.txt").read().split("\n")
     mapping = {}
     end = None
@@ -100,5 +100,5 @@ def part2():
     
 
 if __name__ == "__main__":
-    part1()
-    part2()
+    part1("in14.txt")
+    part2("in14.txt")

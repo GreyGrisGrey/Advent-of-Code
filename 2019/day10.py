@@ -18,7 +18,7 @@ def search(step, prev, start, mapping):
                     return [1, floor(currCoords[0]) * 1000 + floor(currCoords[1])]
     return [0, 0]
 
-def part1():
+def part1(fileName = "in.txt"):
     asteroids = {}
     x, y = 0, 0
     for i in open("in.txt").read().split("\n"):
@@ -67,4 +67,4 @@ def part1():
 
 
 if __name__ == "__main__":
-    part1()
+    part1("in10.txt")

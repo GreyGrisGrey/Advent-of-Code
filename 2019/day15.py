@@ -1,8 +1,8 @@
 from intCode import intMachine
 from math import floor
         
-def part1():
-    opens = [[intMachine(15), [0, 0]]]
+def part1(fileName = "in.txt"):
+    opens = [[intMachine(), [0, 0]]]
     closed = []
     steps = 1
     remaining = 1
@@ -72,5 +72,5 @@ def printMapping(mapping, coords, curr, end):
                 print("#", end="")
 
 if __name__ == "__main__":
-    res = part1()
+    res = part1("in15.txt")
     print("Part 1:", res[0], "\nPart 2:", res[1])

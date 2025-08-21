@@ -1,6 +1,6 @@
 from intCode import intMachine
 
-def partBoth(part2):
+def partBoth(part2, fileName = "in.txt"):
     machine = intMachine(9)
     machine.addInput(2 if part2 else 1)
     machine.deleteInputs(False)
@@ -8,5 +8,5 @@ def partBoth(part2):
     machine.run(printOuts = True)
 
 if __name__ == "__main__":
-    partBoth(False)
-    partBoth(True)
+    partBoth(False, "in9.txt")
+    partBoth(True, "in9.txt")

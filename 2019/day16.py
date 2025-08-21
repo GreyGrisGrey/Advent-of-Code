@@ -26,9 +26,9 @@ def runPhase(inputString, repeater, outList):
     return "".join(outList)
             
 
-def part1():
+def part1(fileName = "in.txt"):
     repeater = [0, 1, 0, -1]
-    inputString = open("in.txt").read()
+    inputString = open(fileName).read()
     outList = []
     for i in range(100):
         inputString = runPhase(inputString, repeater, outList)
@@ -37,8 +37,8 @@ def part1():
 
 # works if offset > input length/2 and in no other context.
 # also quite slow.
-def part2():
-    inputString = open("in.txt").read()
+def part2(fileName = "in.txt"):
+    inputString = open(fileName).read()
     offset = int(inputString[0:7:])
     inputString *= 10000
     for i in range(100):
@@ -58,5 +58,5 @@ def part2():
     print("Part 2:", "".join(inputString[0:8:]))
 
 if __name__ == "__main__":
-    part1()
-    part2()
+    part1("in16.txt")
+    part2("in16.txt")

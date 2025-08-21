@@ -1,6 +1,6 @@
 from math import floor
 
-def part1():
+def part1(fileName = "in.txt"):
     data = open("in.txt").read().split("\n")
     spaces = {}
     tags = []
@@ -65,7 +65,7 @@ def part1():
                         opens.append(tagMapping[nextSpace])
         del opens[0]
 
-def part2():
+def part2(fileName = "in.txt"):
     data = open("in.txt").read().split("\n")
     spaces = {}
     tags = []
@@ -139,5 +139,5 @@ def part2():
         del opens[0]
 
 if __name__ == "__main__":
-    print("Part 1:", part1())
-    print("Part 2:", part2())
+    print("Part 1:", part1("in20.txt"))
+    print("Part 2:", part2("in20.txt"))

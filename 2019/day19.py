@@ -1,8 +1,7 @@
 from intCode import intMachine
 
-def part1():
+def part1(fileName = "in.txt"):
     count = 0
-    spaces = {}
     for i in range(50):
         for j in range(50):
             machine = intMachine(19)
@@ -13,7 +12,7 @@ def part1():
     return count
 
 # takes a minute
-def part2():
+def part2(fileName = "in.txt"):
     currX = 0
     currY = 870
     while True:
@@ -56,5 +55,5 @@ def part2():
         currY += 1
 
 if __name__ == "__main__":
-    print("Part 1:", part1())
-    print("Part 2:", part2())
+    print("Part 1:", part1("in19.txt"))
+    print("Part 2:", part2("in19.txt"))

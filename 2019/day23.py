@@ -1,6 +1,6 @@
 from intCode import intMachine
 
-def partBoth():
+def partBoth(fileName = "in.txt"):
     machines = {}
     flying = {}
     end = [0, 0]
@@ -45,6 +45,6 @@ def partBoth():
             curr = None
 
 if __name__ == "__main__":
-    res = partBoth()
+    res = partBoth("in23.txt")
     print("Part 1:", res[0])
     print("Part 2:", res[1])

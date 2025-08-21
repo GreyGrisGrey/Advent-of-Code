@@ -1,6 +1,6 @@
 from math import floor
 
-def forwardStep(data, index, deckSize, primesMapping = None):
+def forwardStep(data, index, deckSize):
     if data[index[1]] == "deal into new stack":
         index[0] = abs((deckSize - 1) - index[0])
     else:
@@ -22,7 +22,7 @@ def deckStep(data, index, deckPosition, deckSize):
         else:
             deckPosition[0] = (deckPosition[0] + int(line[1]) * deckPosition[1]) % deckSize
                 
-def part1():
+def part1(fileName = "in.txt"):
     deckSize = 10007
     data = open("in.txt").read().split("\n")
     index = [2019, 0]
@@ -64,7 +64,7 @@ def exponentialModulo(num, exponent, additionalNum):
         num = (num**10) % additionalNum
     return int(total)
 
-def part2():
+def part2(fileName = "in.txt"):
     deckSize = 119315717514047
     shuffleCount = 101741582076661
     data = open("in.txt").read().split("\n")
@@ -78,5 +78,5 @@ def part2():
     print((deckPosition[0] + (deckPosition[1] * 2020)) % deckSize)
 
 if __name__ == "__main__":
-    print("Part 1:", part1())
-    print("Part 2:", part2())
+    print("Part 1:", part1("in22.txt"))
+    print("Part 2:", part2("in22.txt"))

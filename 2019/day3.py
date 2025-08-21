@@ -1,4 +1,4 @@
-def partBoth():
+def partBoth(fileName = "in.txt"):
     spaces = {}
     flag = True
     best = [-1, -1]
@@ -20,4 +20,5 @@ def partBoth():
         flag = False
     print("Part 1:", best[0], "\nPart 2:", best[1])
 
-partBoth()
+if __name__ == "__main__":
+    partBoth("in3.txt")
