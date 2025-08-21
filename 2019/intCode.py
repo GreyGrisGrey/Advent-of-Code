@@ -1,9 +1,9 @@
 from math import floor
 
 class intMachine:
-    def __init__(self, day, fileName = "in.txt"):
-        self.day = day
-        self.spaces = initializeMapping(fileName)
+    def __init__(self, toggleNegative = False, fileName = "in.txt"):
+        self.toggleNegative = toggleNegative
+        self.spaces = self.initializeMapping(fileName)
         self.index = 0
         self.state = 0
         self.out = [False, 0]
@@ -11,8 +11,9 @@ class intMachine:
         self.delFlag = True
         self.rel = 0
     
+    # Creates and returns a copy of itself.
     def clone(self):
-        newMachine = intMachine(self.day)
+        newMachine = intMachine()
         for i in self.spaces:
             newMachine.setIndex(i, self.spaces[i])
         newMachine.addInputs(self.inputs)
@@ -22,12 +23,15 @@ class intMachine:
         newMachine.rel = self.rel
         return newMachine
     
+    # Flag to toggle whether the intMachine deletes inputs on using them.
     def deleteInputs(self, newDel):
         self.delFlag = newDel
     
+    # Method to add multiple inputs to the intMachine's current list of inputs.
     def addInputs(self, newInputs):
         self.inputs.extend(newInputs)
     
+    # Method to add singular input to the intMachine's current list of inputs.
     def addInput(self, newInput):
         self.inputs.append(newInput)
     
@@ -48,7 +52,7 @@ class intMachine:
     def retrieveInLen(self):
         return len(self.inputs)
     
-    def run(self, printOuts = False, getOuts = False):
+    def run(self, printOuts = False, getOuts = True):
         while self.state == 0:
             self.step()
             if self.out[0] and printOuts:
@@ -57,6 +61,7 @@ class intMachine:
                 return [self.state, self.out[1]]
         return [self.state, None]
     
+    # Wrapper code for handling the result of a single instruction.
     def step(self, getOuts = True):
         if self.state == 0:
             if self.out[0]:
@@ -66,25 +71,25 @@ class intMachine:
                 return [self.state, self.out[1]]
         return [self.state, None]
     
-    # Runs singular code step
+    # Runs singular code step.
     def runOp(self):
-        instruct = getInstruct(self.spaces[self.index])
+        instruct = self.getInstruct(self.spaces[self.index])
         match instruct:
-            # End Program
+            # End Program.
             case 99:
                 self.state = 1
-            # Add locations i+1 and i+2, write to location i+3
+            # Add locations i+1 and i+2, write to location i+3.
             case 1:
                 self.spaces[self.getTarget(2)] = self.getWord(0) + self.getWord(1)
                 self.index += 4
-            # Multiply locations i+1 and i+2, write to location i+3
+            # Multiply locations i+1 and i+2, write to location i+3.
             case 2: 
                 self.spaces[self.getTarget(2)] = self.getWord(0) * self.getWord(1)
                 self.index += 4
-            # Write input to target location
-            # Known issue: Currently inserts "None" into self.spaces if called without input
+            # Write input to target location.
             case 3:
-                if len(self.inputs) == 0 and self.day == 23:
+                if len(self.inputs) == 0 and self.toggleNegative:
+                    # Exists to handle the case of day 23.
                     self.addInput(-1)
                 if len(self.inputs) == 0:
                     print("Error: Requested input without providing input")
@@ -95,25 +100,25 @@ class intMachine:
                 self.index += 2
                 if self.delFlag:
                     del self.inputs[0]
-            # Output target location
+            # Output target location.
             case 4:
                 noun = self.getWord(0)
                 self.out = [True, noun]
                 self.index += 2
-            # Jump if i+1 isn't 0
+            # Jump if i+1 isn't 0.
             case 5:
                 noun, verb = self.getWord(0), self.getWord(1)
                 self.index = verb if noun != 0 else self.index + 3
-            # Jump if i+1 is 0
+            # Jump if i+1 is 0.
             case 6:
                 noun, verb = self.getWord(0), self.getWord(1)
                 self.index = verb if noun == 0 else self.index + 3
-            # Set register to 1 if i+1 < i+2, otherwise 0
+            # Set register to 1 if i+1 < i+2, otherwise 0.
             case 7:
                 noun, verb = self.getWord(0), self.getWord(1)
                 self.spaces[self.getTarget(2)] = 1 if noun < verb else 0
                 self.index += 4
-            # Set register to 1 if i+1 == i+2, otherwise 0
+            # Set register to 1 if i+1 == i+2, otherwise 0.
             case 8:
                 noun, verb = self.getWord(0), self.getWord(1)
                 self.spaces[self.getTarget(2)] = 1 if noun == verb else 0
@@ -121,19 +126,19 @@ class intMachine:
             case 9:
                 self.rel += self.getWord(0)
                 self.index += 2
-            # Unknown Opcode, error
+            # Unknown Opcode, error.
             case _:
                 print("Error: Unknown Opcode")
                 print("Opcode:", self.spaces[self.index], "Location:", self.index)
                 self.state = 2
     
-    # Retrieves data associated with index + parse code
+    # Retrieves data associated with index + parse code.
     def getWord(self, adder):
         return self.checkVal(self.spaces[self.getTarget(adder)])
     
-    # Retrieves location associated with index + parse code
+    # Retrieves location associated with index + parse code.
     def getTarget(self, adder):
-        match getDigit(self.spaces[self.index], 2 + adder):
+        match self.getDigit(self.spaces[self.index], 2 + adder):
             case 0:
                 targ = self.checkVal(self.spaces[self.checkVal(self.index + 1 + adder)])
             case 1:
@@ -148,21 +153,18 @@ class intMachine:
             self.spaces[val] = 0
         return val
 
-
-# Several functions currently outside class on the basis that they may have uses outside the class.
-# Remains to be seen.
-
-# Generates registry from filename
-def initializeMapping(filename = "in.txt"):
-    spaces = {}
-    curr = 0
-    for i in open(filename).read().split(","):
-        spaces[curr] = int(i)
-        curr += 1
-    return spaces
+    # Generates registry from filename.
+    def initializeMapping(self, filename = "in.txt"):
+        spaces = {}
+        curr = 0
+        for i in open(filename).read().split(","):
+            spaces[curr] = int(i)
+            curr += 1
+        return spaces
     
-def getDigit(num, index):
-    return floor(num/10**index) % 10
+    # Gets digit associated with index.
+    def getDigit(self, num, index):
+        return floor(num/10**index) % 10
 
-def getInstruct(num):
-    return num % 100
+    def getInstruct(self, num):
+        return num % 100
