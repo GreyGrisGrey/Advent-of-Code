@@ -1,27 +1,9 @@
-from math import floor, gcd, sin, cos, ceil
-#Simply does not work for part 2, TODO return later
-def search(step, prev, start, mapping):
-    startCoords = [floor(start/1000) + 0.5, (start % 1000) + 0.5]
-    change = [cos(step), -sin(step)]
-    changePrev = [cos(prev), -sin(prev)]
-    currCoords = [startCoords[0] + change[0]*70, startCoords[1] + change[1]*70]
-    prevCoords = [startCoords[0] + changePrev[0]*70, startCoords[1] + changePrev[1]*70]
-    while abs(currCoords[0] - startCoords[0]) > 0.3 or abs(currCoords[1] - startCoords[1]) > 0.3:
-        currCoords[0] -= change[0] * 0.2
-        currCoords[1] -= change[1] * 0.2
-        prevCoords[0] -= changePrev[0] * 0.2
-        prevCoords[1] -= changePrev[1] * 0.2
-        if prev != -100000 and floor(currCoords[0]) + 0.5 and floor(currCoords[1]) + 0.5:
-            if floor(currCoords[0]) + 0.5 <= currCoords[0] and floor(currCoords[1]) + 0.5 <= currCoords[1]:
-                if (floor(currCoords[0]) * 1000 + floor(currCoords[1])) in mapping:
-                    del mapping[floor(currCoords[0]) * 1000 + floor(currCoords[1])]
-                    return [1, floor(currCoords[0]) * 1000 + floor(currCoords[1])]
-    return [0, 0]
+from math import floor, gcd, atan2, pi
 
-def part1(fileName = "in.txt"):
+def partBoth(fileName = "in.txt"):
     asteroids = {}
     x, y = 0, 0
-    for i in open("in.txt").read().split("\n"):
+    for i in open(fileName).read().split("\n"):
         for j in i:
             if j == "#":
                 asteroids[x * 1000 + y] = True
@@ -51,20 +33,22 @@ def part1(fileName = "in.txt"):
             best[0] = total
             best[1] = i
             best[2] = newMapping
-    print("Part 1:", best[0], best[1])
-    total = 0
-    prev = -100000
-    for i in range(720):
-        res = search((3.14159)/2 - (i/100), prev, best[1], best[2])
-        prev = (3.14159)/2 - (i/100)
-        total += res[0]
-        if res[0] != 0:
-            print(floor(res[1]/1000), res[1] % 1000, total)
-        if total == 200:
-            print(res[0], floor(res[1]/1000), res[1] % 1000)
-            return
-        
+    polars = []
+    for i in best[2]:
+        coords = [floor(i/1000) - floor(best[1]/1000), (i % 1000) - (best[1] % 1000)]
+        newCoord = atan2(coords[1], coords[0])
+        polars.append([newCoord, [floor(i/1000), i % 1000]])
+    polars.sort(key= lambda x: x[0])
+    polars.reverse()
+    currIndex = len(polars) - 1
+    while True:
+        if polars[currIndex][0] >= -pi/2:
+            currIndex = (currIndex - 199) % len(polars)
+            return (best[0], polars[currIndex][1])
+        currIndex -= 1
 
 
 if __name__ == "__main__":
-    part1("in10.txt")
+    res = partBoth("in10.txt")
+    print("Part 1:", res[0])
+    print("Part 2:", res[1][0] * 100 + res[1][1])
