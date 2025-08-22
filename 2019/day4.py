@@ -24,13 +24,14 @@ def check2(num):
 
 def partBoth(fileName = "in.txt"):
     res = [0, 0]
-    start, end = open("in.txt").read().split("-")
+    start, end = open(fileName).read().split("-")
     for i in range(int(end) + 1):
         if i >= int(start) and check(i):
             if check2(i):
                 res[1] += 1
             res[0] += 1
-    print("Part 1:", res[0], "\nPart 2:", res[1])
+    return res
 
 if __name__ == "__main__":
-    partBoth("in4.txt")
+    res = partBoth("in4.txt")
+    print("Part 1:", res[0], "\nPart 2:", res[1])

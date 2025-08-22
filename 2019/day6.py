@@ -11,7 +11,7 @@ def part1(fileName = "in.txt"):
     mapping = {}
     orbits = []
     curr = 0
-    for i in open("in.txt").read().split("\n"):
+    for i in open(fileName).read().split("\n"):
         line = i.split(")")
         if line[0] not in mapping:
             mapping[line[0]] = curr
@@ -21,14 +21,14 @@ def part1(fileName = "in.txt"):
     total = 0
     for i in mapping:
         total += countOrbit(i, orbits, mapping) - 1
-    print("Part 1:", total)
+    return total
     
 def part2(fileName = "in.txt"):
     mapping = {}
     reversing = {}
     orbits = []
     curr = 0
-    for i in open("in.txt").read().split("\n"):
+    for i in open(fileName).read().split("\n"):
         line = i.split(")")
         if line[0] not in mapping:
             mapping[line[0]] = curr
@@ -48,8 +48,7 @@ def part2(fileName = "in.txt"):
         curr = opens[0]
         remaining -= 1
         if curr == end:
-            print("Part 2:", count-2)
-            return
+            return count - 2
         if curr in mapping:
             for i in orbits[mapping[curr]]:
                 if i not in closed:
@@ -61,5 +60,5 @@ def part2(fileName = "in.txt"):
         del opens[0]
 
 if __name__ == "__main__":
-    part1("in6.txt")
-    part2("in6.txt")
+    print("Part 1:", part1("in6.txt"))
+    print("Part 2:", part2("in6.txt"))

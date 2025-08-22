@@ -1,9 +1,9 @@
 from intCode import intMachine
 
-def partBoth(fileName = "in.txt"):
-    first = intMachine(5)
+def partBoth(fileNameNew = "in.txt"):
+    first = intMachine(fileName = fileNameNew)
     first.addInput(1)
-    second = intMachine(5)
+    second = intMachine(fileName = fileNameNew)
     second.addInput(5)
     done = [0, 0]
     final = [None, None]
@@ -16,7 +16,7 @@ def partBoth(fileName = "in.txt"):
             done[1], res = second.step()
             if res != None:
                 final[1] = res
-    return (final[0], final[1])
+    return final
 
 if __name__ == "__main__":
     res = partBoth("in5.txt")
