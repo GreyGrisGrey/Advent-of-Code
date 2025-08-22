@@ -8,7 +8,8 @@ def partBoth(fileName = "in.txt"):
         while res > 0:
             end[1] += res
             res = floor(res/3) - 2
-    print("Part 1:", end[0], "\nPart 2:", end[1])
+    return end
 
 if __name__ == "__main__":
-    partBoth("in1.txt")
+    res = partBoth("in1.txt")
+    print("Part 1:", res[0], "\nPart 2:", res[1])

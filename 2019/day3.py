@@ -2,7 +2,7 @@ def partBoth(fileName = "in.txt"):
     spaces = {}
     flag = True
     best = [-1, -1]
-    for i in open("in.txt").read().split("\n"):
+    for i in open(fileName).read().split("\n"):
         curr = [0, 0]
         count = 0
         for j in i.split(","):
@@ -18,7 +18,8 @@ def partBoth(fileName = "in.txt"):
                     if count + spaces[curr[0] * 100000 + curr[1]] < best[1] or best[1] == -1:
                         best[1] = count + spaces[curr[0] * 100000 + curr[1]]
         flag = False
-    print("Part 1:", best[0], "\nPart 2:", best[1])
+    return best
 
 if __name__ == "__main__":
-    partBoth("in3.txt")
+    res = partBoth("in3.txt")
+    print("Part 1:", res[0], "\nPart 2:", res[1])
