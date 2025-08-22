@@ -13,7 +13,6 @@ def partBoth(fileName = "in.txt"):
         if counts[0] < best[0]:
             best[0] = counts[0]
             best[1] = counts[1] * counts[2]
-    print("Part 1:", best[1])
     for i in range(6):
         for j in range(25):
             if mapping[j + (25 * i)] == 1:
@@ -21,6 +20,9 @@ def partBoth(fileName = "in.txt"):
             else:
                 print(" ", end = "")
         print("")
+    return best[1]
 
 if __name__ == "__main__":
-    partBoth("in8.txt")
+    print("Part 2:")
+    res = partBoth("in8.txt")
+    print("Part 1:", res)

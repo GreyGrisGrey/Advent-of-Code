@@ -1,7 +1,7 @@
 from intCode import intMachine
 
-def partBoth(part2, fileName = "in.txt"):
-    machine = intMachine(9)
+def partBoth(part2, fileNameNew = "in.txt"):
+    machine = intMachine(fileName = fileNameNew)
     machine.addInput(2 if part2 else 1)
     machine.deleteInputs(False)
     print("Part 2: " if part2 else "Part 1: ", end = "")
