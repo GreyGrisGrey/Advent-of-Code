@@ -17,8 +17,8 @@ def checkGood(index, maxX, maxY):
         return True
     return False
 
-def part1(fileName = "in.txt"):
-    machine = intMachine(17)
+def part1(fileNameNew = "in.txt"):
+    machine = intMachine(fileName = fileNameNew)
     spaces = {}
     x = 0
     y = 0
@@ -83,8 +83,8 @@ def part1(fileName = "in.txt"):
             flag = True
             index += 1
 
-def part2(fileName = "in.txt"):
-    machine = intMachine(17)
+def part2(fileNameNew = "in.txt"):
+    machine = intMachine(fileName = fileNameNew)
     A = "L 12 R 8 L 6 R 8 L 6"
     B = "R 8 L 12 L 12 R 8"
     C = "L 6 R 6 L 12"
@@ -111,9 +111,7 @@ def part2(fileName = "in.txt"):
             print("Part 1:", res[1])
         elif res[0] != 0:
             break
-                
-        
-            
+
 
 if __name__ == "__main__":
     part1("in17.txt")

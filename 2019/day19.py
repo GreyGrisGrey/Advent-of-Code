@@ -4,19 +4,19 @@ def part1(fileName = "in.txt"):
     count = 0
     for i in range(50):
         for j in range(50):
-            machine = intMachine(19)
+            machine = intMachine(fileName = fileName)
             machine.addInputs([i, j])
             res = machine.run(getOuts = True)
             if res[1] != 0:
                 count += 1
     return count
 
-# takes a minute
+# Takes a minute
 def part2(fileName = "in.txt"):
     currX = 0
     currY = 870
     while True:
-        machine = intMachine(19)
+        machine = intMachine(fileName = fileName)
         machine.addInputs([currX, currY])
         res = machine.run(getOuts = True)
         if res[1] == 1:
@@ -25,7 +25,7 @@ def part2(fileName = "in.txt"):
             currX += 1
     while True:
         while True:
-            machine = intMachine(19)
+            machine = intMachine(fileName = fileName)
             machine.addInputs([currX, currY])
             res = machine.run(getOuts = True)
             if res[1] == 1:
@@ -34,16 +34,15 @@ def part2(fileName = "in.txt"):
                 currX += 1
         size = 0
         while True:
-            machine = intMachine(19)
+            machine = intMachine(fileName = fileName)
             machine.addInputs([currX + size, currY])
             res = machine.run(getOuts = True)
             if res[1] == 0:
                 break
             size += 1
-        # check where the guy 100 down is, duh
         baseX = currX
         while True:
-            machine = intMachine(19)
+            machine = intMachine(fileName = fileName)
             machine.addInputs([baseX, currY + 99])
             res = machine.run(getOuts = True)
             if res[1] == 1:

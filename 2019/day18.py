@@ -238,5 +238,5 @@ def part2(fileName = "in.txt"):
                         
                 
 if __name__ == "__main__":
-    print("Part 1:", part1())
-    print("Part 2:", part2())
+    print("Part 1:", part1("in18.txt"))
+    print("Part 2:", part2("in18.txt"))

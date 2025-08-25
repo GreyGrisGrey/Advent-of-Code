@@ -20,6 +20,7 @@ def calcDigit(inputString, repeater, i):
                     currIndex = (currIndex + 2) % 4
         return abs(res) % 10
 
+
 def runPhase(inputString, repeater, outList):
     for i in range(len(inputString)):
         outList.append(str(calcDigit(inputString, repeater, i)))
@@ -33,7 +34,7 @@ def part1(fileName = "in.txt"):
     for i in range(100):
         inputString = runPhase(inputString, repeater, outList)
         outList = []
-    print("Part 1:", inputString[0:8:])
+    return inputString[0:8:]
 
 # works if offset > input length/2 and in no other context.
 # also quite slow.
@@ -55,8 +56,9 @@ def part2(fileName = "in.txt"):
                 nextLevel.append(str(abs(total) % 10))
         nextLevel.reverse()
         inputString = nextLevel
-    print("Part 2:", "".join(inputString[0:8:]))
+    return "".join(inputString[0:8:])
+
 
 if __name__ == "__main__":
-    part1("in16.txt")
-    part2("in16.txt")
+    print("Part 1:", part1("in16.txt"))
+    print("Part 2:", part2("in16.txt"))

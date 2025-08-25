@@ -1,7 +1,7 @@
 from math import floor
 
 def part1(fileName = "in.txt"):
-    data = open("in.txt").read().split("\n")
+    data = open(fileName).read().split("\n")
     spaces = {}
     tags = []
     tagMapping = {}
@@ -66,7 +66,7 @@ def part1(fileName = "in.txt"):
         del opens[0]
 
 def part2(fileName = "in.txt"):
-    data = open("in.txt").read().split("\n")
+    data = open(fileName).read().split("\n")
     spaces = {}
     tags = []
     tagMapping = {}
