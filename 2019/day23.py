@@ -8,7 +8,7 @@ def partBoth(fileName = "in.txt"):
     prev = None
     steps = 0
     for i in range(50):
-        machines[i] = intMachine(23)
+        machines[i] = intMachine(toggleNegative = True, fileName = fileName)
         machines[i].addInput(i)
     while True:
         flag = True

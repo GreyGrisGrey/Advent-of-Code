@@ -2,7 +2,7 @@ from intCode import intMachine
 
 def part1(fileName = "in.txt"):
     instructs = ["NOT C T\n", "NOT A J\n", "OR T J\n", "AND D J\n", "WALK\n"]
-    machine = intMachine(21)
+    machine = intMachine(fileName = fileName)
     for i in instructs:
         for j in i:
             machine.addInput(ord(j))
@@ -16,7 +16,7 @@ def part1(fileName = "in.txt"):
 
 def part2(fileName = "in.txt"):
     instructs = ["NOT C T\n", "NOT F J\n", "AND T J\n", "NOT C T\n", "AND F T\n", "AND H T\n", "OR T J\n", "NOT A T\n", "OR T J\n", "NOT B T\n", "OR T J\n", "NOT C T\n", "AND E T\n", "OR T J\n", "AND D J\n", "RUN\n"]
-    machine = intMachine(21)
+    machine = intMachine(fileName = fileName)
     for i in instructs:
         for j in i:
             machine.addInput(ord(j))

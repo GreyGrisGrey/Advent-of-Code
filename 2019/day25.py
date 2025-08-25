@@ -1,7 +1,7 @@
 from intCode import intMachine
 
 def part1(fileName = "in.txt"):
-    machine = intMachine()
+    machine = intMachine(fileName = fileName)
     val = ""
     comDict = {"w":"west", "e":"east", "n":"north", "s":"south", "i":"inv"}
     res = [0, 0]

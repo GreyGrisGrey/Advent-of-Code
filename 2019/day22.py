@@ -24,7 +24,7 @@ def deckStep(data, index, deckPosition, deckSize):
                 
 def part1(fileName = "in.txt"):
     deckSize = 10007
-    data = open("in.txt").read().split("\n")
+    data = open(fileName).read().split("\n")
     index = [2019, 0]
     cache = {}
     cache["2019:0"] = True
@@ -67,15 +67,13 @@ def exponentialModulo(num, exponent, additionalNum):
 def part2(fileName = "in.txt"):
     deckSize = 119315717514047
     shuffleCount = 101741582076661
-    data = open("in.txt").read().split("\n")
+    data = open(fileName).read().split("\n")
     deckPosition = [0, 1]
     for i in range(len(data)):
         deckStep(data, [0, i], deckPosition, deckSize)
-    print(deckPosition)
     deckPosition[0] = (deckPosition[0] * (1 - (exponentialModulo(deckPosition[1], shuffleCount, deckSize))) * pow((1 - deckPosition[1]) % deckSize, deckSize - 2, deckSize)) % deckSize
     deckPosition[1] = exponentialModulo(deckPosition[1], shuffleCount, deckSize)
-    print(deckPosition)
-    print((deckPosition[0] + (deckPosition[1] * 2020)) % deckSize)
+    return (deckPosition[0] + (deckPosition[1] * 2020)) % deckSize
 
 if __name__ == "__main__":
     print("Part 1:", part1("in22.txt"))
