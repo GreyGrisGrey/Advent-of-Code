@@ -1,8 +1,8 @@
 from intCode import intMachine
 from math import floor
         
-def part1(fileName = "in.txt"):
-    opens = [[intMachine(), [0, 0]]]
+def part1(fileNameNew = "in.txt"):
+    opens = [[intMachine(fileName = fileNameNew), [0, 0]]]
     closed = []
     steps = 1
     remaining = 1

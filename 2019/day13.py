@@ -1,8 +1,8 @@
 from intCode import intMachine
 
-def part1(fileName = "in.txt"):
+def part1(fileNameNew = "in.txt"):
     tiles = {}
-    machine = intMachine(13)
+    machine = intMachine(fileName = fileNameNew)
     nums = [0, 0, 0]
     index = -1
     while True:
@@ -20,8 +20,9 @@ def part1(fileName = "in.txt"):
     for i in tiles:
         if tiles[i] == 2:
             total += 1
-    print("Part 1:", total)
+    return total
 
+# Unused code for printing current state of board.
 def printScreen(tiles):
     for i in range(42):
         print("")
@@ -32,9 +33,9 @@ def printScreen(tiles):
                 print(" ", end="")
     print("")
 
-def part2(fileName = "in.txt"):
+def part2(fileNameNew = "in.txt"):
     tiles = {}
-    machine = intMachine(13)
+    machine = intMachine(fileName = fileNameNew)
     machine.setIndex(0, 2)
     currBall = None
     prevBall = None
@@ -77,8 +78,8 @@ def part2(fileName = "in.txt"):
         else:
             break
         index = (index + 1) % 3
-    print("Part 2:", score)
+    return score
 
 if __name__ == "__main__":
-    part1("in13.txt")
-    part2("in13.txt")
+    print("Part 1:", part1("in13.txt"))
+    print("Part 2:", part2("in13.txt"))

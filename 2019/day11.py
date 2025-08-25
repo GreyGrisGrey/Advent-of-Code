@@ -26,8 +26,8 @@ def printCode(mapping):
         print(newLine)
     
 
-def partBoth(two = False, fileName = "in.txt"):
-    machine = intMachine(11)
+def partBoth(two = False, fileNameNew = "in.txt"):
+    machine = intMachine(fileName = fileNameNew)
     currSpace = [0, 0]
     direction = [0, -1]
     mapping = {}
@@ -40,7 +40,7 @@ def partBoth(two = False, fileName = "in.txt"):
         res = machine.run(getOuts = True)
         if res[0] != 0:
             if not two:
-                print("Part 1:", len(mapping) - 1)
+                return len(mapping) - 1
             else:
                 printCode(mapping)
             break
@@ -60,5 +60,5 @@ def partBoth(two = False, fileName = "in.txt"):
             mapping[currSpace[0] * 100 + currSpace[1]] = 0
 
 if __name__ == "__main__":
-    partBoth("in11.txt")
+    print("Part 1:", partBoth(False, "in11.txt"))
     partBoth(True, "in11.txt")

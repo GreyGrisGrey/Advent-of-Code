@@ -9,6 +9,7 @@ def moonString(moons, vels, index):
 
 def partBoth(fileName = "in.txt"):
     data = open(fileName).read().split("\n")
+    end = [0, 0]
     moons = []
     vels = []
     caches = [{}, {}, {}]
@@ -28,9 +29,7 @@ def partBoth(fileName = "in.txt"):
                     news[0] += abs(moons[i][j])
                     news[1] += abs(vels[i][j])
                 total += news[0] * news[1]
-            print("Part 1:", total)
-        if i % 500000 == 0:
-            print(i)
+            end[0] = total
         for j in range(len(moons)):
             for k in range(len(moons)):
                 if j < k:
@@ -57,7 +56,10 @@ def partBoth(fileName = "in.txt"):
     curr = nums[0]
     curr = int(curr * nums[1] / gcd(nums[1], nums[0]))
     curr = curr * nums[2] / gcd(nums[2], curr)
-    print("Part 2:", int(curr))
+    end[1] = curr
+    return end
 
 if __name__ == "__main__":
-    partBoth("in12.txt")
+    res = partBoth("in12.txt")
+    print("Part 1:", res[0])
+    print("Part 2:", int(res[1]))

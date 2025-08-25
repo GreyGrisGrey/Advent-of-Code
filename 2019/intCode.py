@@ -10,10 +10,11 @@ class intMachine:
         self.inputs = []
         self.delFlag = True
         self.rel = 0
+        self.fileName = fileName
     
     # Creates and returns a copy of itself.
     def clone(self):
-        newMachine = intMachine()
+        newMachine = intMachine(fileName = self.fileName)
         for i in self.spaces:
             newMachine.setIndex(i, self.spaces[i])
         newMachine.addInputs(self.inputs)

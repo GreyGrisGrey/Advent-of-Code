@@ -1,7 +1,7 @@
 from math import ceil
 
 def part1(fileName = "in.txt"):
-    data = open("in.txt").read().split("\n")
+    data = open(fileName).read().split("\n")
     mapping = {}
     end = None
     begin = []
@@ -44,7 +44,7 @@ def part1(fileName = "in.txt"):
     print("Part 1:", required)
 
 def part2(fileName = "in.txt"):
-    data = open("in.txt").read().split("\n")
+    data = open(fileName).read().split("\n")
     mapping = {}
     end = None
     begin = []
@@ -64,7 +64,6 @@ def part2(fileName = "in.txt"):
         excess[i] = 0
     avail = 1000000000000
     count = 0
-    # Definitely feels like theres an exceptionally clever numerical solution here I'm missing.
     while True:
         if count % 10000 == 0:
             print(count)
@@ -96,8 +95,6 @@ def part2(fileName = "in.txt"):
         count += 1
     print("Part 2:", count)
             
-        
-    
 
 if __name__ == "__main__":
     part1("in14.txt")
