@@ -39,5 +39,3 @@ def part2():
 if __name__ == "__main__":
     print(part1())
     print(part2())
-
-# 29045197546 high
