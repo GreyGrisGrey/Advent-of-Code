@@ -36,5 +36,5 @@ function part2(): number {
     return res
 }
 
-console.log(part1())
-console.log(part2())
+console.log("Part 1:", part1())
+console.log("Part 1:", part2())
